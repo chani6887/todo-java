@@ -10,11 +10,11 @@ public class Main {
 
         while (true) {
             System.out.println("\n=== Task Manager ===");
-            System.out.println("1. Add new task");
-            System.out.println("2. Mark task as DONE");
-            System.out.println("3. Search tasks by text");
-            System.out.println("4. Show all tasks sorted by status");
-            System.out.println("5. Exit");
+            System.out.println("1. Add new task ⭐");
+            System.out.println("2. Mark task as DONE ✔");
+            System.out.println("3. Search tasks by text 🔍");
+            System.out.println("4. Show all tasks sorted by status 🧷");
+            System.out.println("5. Exit ❌");
             System.out.print("Choose an option: ");
 
             String choice = scanner.nextLine();
@@ -45,9 +45,13 @@ public class Main {
                     System.out.print("Enter search text: ");
                     String searchText = scanner.nextLine();
                     List<Task> results = service.searchTasks(searchText);
-                    System.out.println("Search results:");
-                    for (Task t : results) {
-                        System.out.println(t);
+                    if (results.isEmpty()) {
+                        System.out.println("No tasks found matching your search.");
+                    } else {
+                        System.out.println("Search results:");
+                        for (Task t : results) {
+                            System.out.println(t);
+                        }
                     }
                     break;
 
@@ -60,7 +64,7 @@ public class Main {
                     break;
 
                 case "5":
-                    System.out.println("Exiting...");
+                    System.out.println("Exiting...🖐");
                     scanner.close();
                     return;
 

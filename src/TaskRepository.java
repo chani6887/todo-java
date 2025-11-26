@@ -3,83 +3,106 @@ import java.util.*;
 
 public class TaskRepository {
 
-    // File where tasks are stored
     private final File file = new File("tasks.json");
 
-    // List to hold tasks in memory
-    private List<Task> tasks = new ArrayList<>();
+    // Map to hold tasks in memory: ID -> Task
+    private Map<Integer, Task> taskMap = new HashMap<>();
 
-    // Constructor: load tasks when repository is created
     public TaskRepository() {
         load();
     }
 
-    /** Loading tasks from the file */
+    /** Loading tasks from JSON file manually */
     private void load() {
         if (!file.exists()) return;
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            StringBuilder sb = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
-                // Simple JSON-like format: id|title|description|phase/status
-                String[] parts = line.split("\\|");
-                if (parts.length == 4) {
-                    Task task = new Task(parts[1]); // title
-                    task.setDescription(parts[2]);
-                    task.setStatus(ProgressStage.valueOf(parts[3]));
-                    task.setId(Integer.parseInt(parts[0]));
-                    tasks.add(task);
-                }
+                sb.append(line.trim());
             }
+            String content = sb.toString();
+
+            if (content.startsWith("[") && content.endsWith("]")) {
+                content = content.substring(1, content.length() - 1);
+            }
+
+            if (content.isEmpty()) return;
+
+            String[] objects = content.split("\\},\\{");
+
+            for (String obj : objects) {
+                obj = obj.replace("{", "").replace("}", "");
+                Map<String, String> fields = new HashMap<>();
+
+                String[] pairs = obj.split(",");
+                for (String pair : pairs) {
+                    String[] kv = pair.split(":", 2);
+                    if (kv.length == 2) {
+                        String key = kv[0].trim().replace("\"", "");
+                        String value = kv[1].trim().replace("\"", "");
+                        fields.put(key, value);
+                    }
+                }
+
+                Task task = new Task(fields.get("title"));
+                task.setDescription(fields.get("description"));
+                task.setStatus(ProgressStage.valueOf(fields.get("status")));
+                task.setId(Integer.parseInt(fields.get("id")));
+
+                taskMap.put(task.getId(), task);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /** Saving tasks to the file */
+    /** Saving tasks to JSON file manually */
     private void save() {
         try (PrintWriter pw = new PrintWriter(file)) {
-            for (Task t : tasks) {
-                pw.println(t.getId() + "|" + t.getTitle() + "|" + t.getDescription() + "|" + t.getStatus());
-                // NOTE: same as above – make sure the getter name matches the enum field
-                // In previous code: t.getPhase() instead of t.getStatus()
+            pw.println("[");
+            List<Task> tasks = new ArrayList<>(taskMap.values());
+            for (int i = 0; i < tasks.size(); i++) {
+                Task t = tasks.get(i);
+                pw.print("  {");
+                pw.print("\"id\":\"" + t.getId() + "\",");
+                pw.print("\"title\":\"" + t.getTitle() + "\",");
+                pw.print("\"description\":\"" + t.getDescription() + "\",");
+                pw.print("\"status\":\"" + t.getStatus() + "\"");
+                pw.print("}");
+                if (i < tasks.size() - 1) pw.println(",");
+                else pw.println();
             }
+            pw.println("]");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    // --- CRUD operations ---
+    // --- CRUD operations using Map ---
 
-    // Add a task
     public void add(Task task) {
-        tasks.add(task);
+        taskMap.put(task.getId(), task);
         save();
     }
 
-    // Update a task: remove old one by ID, add the new one
     public void update(Task task) {
-        delete(task.getId());
-        tasks.add(task);
+        taskMap.put(task.getId(), task);
         save();
     }
 
-    // Delete a task by ID
     public void delete(int id) {
-        tasks.removeIf(t -> t.getId() == id);
+        taskMap.remove(id);
         save();
     }
 
-    // Retrieve a task by ID
     public Task getById(int id) {
-        return tasks.stream()
-                .filter(t -> t.getId() == id)
-                .findFirst()
-                .orElse(null);
+        return taskMap.get(id);
     }
 
-    // Get a copy of all tasks
     public List<Task> listAll() {
-        return new ArrayList<>(tasks);
+        return new ArrayList<>(taskMap.values());
     }
 }
