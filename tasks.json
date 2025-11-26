@@ -1,10 +1,10 @@
-0|"Submit insurance claim form"|"Collect and submit the necessary documents for claim processing"|NEW
-1|"Review policy application"|"Check all submitted policy applications for completeness and correctness"|IN_PROGRESS
-2|"Call client for premium payment"|"Contact client to remind them of upcoming premium payment"|NEW
-3|"Process car accident claim"|"Evaluate damages and approve or reject car accident claim"|IN_PROGRESS
-4|"Update client database"|"Ensure all client information is up-to-date in the system"|DONE
-5|"Prepare monthly insurance report"|"Compile monthly reports of claims and policies for management"|NEW
-6|"Audit underwriting files"|"Perform quality check of underwriting documentation"|IN_PROGRESS
-7|"Schedule client meeting"|"Arrange meeting with client to explain policy options"|DONE
-8|"Renew life insurance policy"|"Send renewal notice to client and update policy records"|NEW
-9|"Investigate suspicious claim"|"Review suspicious claims for potential fraud"|IN_PROGRESS
+[{"id":0,"title":"Submit claim","description":"Collect docs","status":"NEW"},
+  {"id":1,"title":"Review app","description":"Check apps","status":"IN_PROGRESS"},
+  {"id":2,"title":"Call client","description":"Payment reminder","status":"NEW"},
+  {"id":3,"title":"Process claim","description":"Evaluate damages","status":"IN_PROGRESS"},
+  {"id":4,"title":"Update DB","description":"Update info","status":"DONE"},
+  {"id":5,"title":"Monthly report","description":"Compile reports","status":"NEW"},
+  {"id":6,"title":"Audit files","description":"Check docs","status":"IN_PROGRESS"},
+  {"id":7,"title":"Schedule meeting","description":"Explain options","status":"DONE"},
+  {"id":8,"title":"Renew policy","description":"Send notice","status":"NEW"},
+  {"id":9,"title":"Investigate claim","description":"Check fraud","status":"IN_PROGRESS"}]
