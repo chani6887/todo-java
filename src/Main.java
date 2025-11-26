@@ -14,7 +14,8 @@ public class Main {
             System.out.println("2. Mark task as DONE ✔");
             System.out.println("3. Search tasks by text 🔍");
             System.out.println("4. Show all tasks sorted by status 🧷");
-            System.out.println("5. Exit ❌");
+            System.out.println("5. Delete task 🗑");
+            System.out.println("6. Exit ❌");
             System.out.print("Choose an option: ");
 
             String choice = scanner.nextLine();
@@ -63,7 +64,14 @@ public class Main {
                     }
                     break;
 
-                case "5":
+                case "5":  // delete task
+                    System.out.print("Enter task ID to delete: ");
+                    int idDelete = Integer.parseInt(scanner.nextLine());
+                    repository.delete(idDelete);
+                    System.out.println("Task deleted!");
+                    break;
+
+                case "6":
                     System.out.println("Exiting...🖐");
                     scanner.close();
                     return;

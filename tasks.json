@@ -1,6 +1,5 @@
 [
-  {"id":"0","title":""kkk"","description":""kkk"","status":"NEW"},
-  {"id":"1","title":"Review app","description":"Check apps","status":"DONE"},
+  {"id":"0","title":"ggg","description":"ggg","status":"NEW"},
   {"id":"2","title":"Call client","description":"Payment reminder","status":"NEW"},
   {"id":"3","title":"Process claim","description":"Evaluate damages","status":"IN_PROGRESS"},
   {"id":"4","title":"Update DB","description":"Update info","status":"DONE"},
