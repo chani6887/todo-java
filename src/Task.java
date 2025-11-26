@@ -5,6 +5,13 @@ public class Task {
     private ProgressStage status;
 
     // Constructor
+    public Task(){
+
+    }
+    public Task(String title) {
+        this.title = title;
+        this.status = ProgressStage.NEW;
+    }
     public Task(int id, String title, String description, ProgressStage status) {
         this.id = id;
         this.title = title;
@@ -12,10 +19,6 @@ public class Task {
         this.status = status;
     }
 
-    public Task(String title) {
-        this.title = title;
-        this.status = ProgressStage.NEW;
-    }
     // Getters & Setters
     public int getId() {
         return id;
