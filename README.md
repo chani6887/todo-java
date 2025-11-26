@@ -1,25 +1,77 @@
 Task Manager Project
-A simple Task Manager application in Java to add, update, delete, search, and list tasks.
+Overview
 
-UI:
-Add a new task (title + description)
+A simple Task Manager written in Java (standard libraries only).
+Allows users to add, update, delete, mark as done, search, and list tasks sorted by status.
+Tasks are stored manually in a JSON-like file (tasks.json).
 
-Mark task as DONE
+Features
 
-Delete task by ID
+Add new tasks (title + description).
 
-Search tasks by text
+Mark tasks as DONE.
 
-List tasks sorted by status
+Delete tasks by ID.
+
+Search tasks by text in title or description.
+
+List all tasks sorted by status (NEW, IN_PROGRESS, DONE).
+
+Stores tasks persistently in a JSON-like file.
+
+Uses Map internally for fast access by task ID.
 
 File Structure
-src/
-  Task.java
-  ProgressStage.java
-  TaskRepository.java
-  TaskService.java
-  Main.java
-tasks.json
+todo-app/
+│
+├─ src/
+│  ├─ Task.java
+│  ├─ ProgressStage.java
+│  ├─ TaskRepository.java
+│  ├─ TaskService.java
+│  └─ Main.java
+│
+└─ tasks.json
+
+How to Run
+
+Compile all Java files:
+
+javac src/*.java
+
+
+Run the program:
+
+java -cp src Main
+
+
+Follow menu options:
+
+1: Add new task
+2: Mark task as DONE
+3: Search tasks by text
+4: Show all tasks sorted by status
+5: Delete task
+6: Exit
+
+Task JSON Format
+[
+  {"id":"0","title":"Submit claim","description":"Submit claim","status":"NEW"},
+  {"id":"1","title":"Review policy","description":"Check apps","status":"IN_PROGRESS"}
+]
+
+
+Handled manually (no external libraries).
+
+Adding, updating, deleting tasks automatically saves the file.
+
+Notes
+
+JSON is managed manually, no external libraries.
+
+Code focuses on functionality, not UI design.
+
+All changes are automatically saved.
 
 How to Run
 javac src/*.java
