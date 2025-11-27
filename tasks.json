@@ -6,6 +6,5 @@
   {"id":"5","title":"Monthly report","description":"Compile reports","status":"NEW"},
   {"id":"6","title":"Audit files","description":"Check docs","status":"IN_PROGRESS"},
   {"id":"7","title":"Schedule meeting","description":"Explain options","status":"DONE"},
-  {"id":"8","title":"Renew policy","description":"Send notice","status":"NEW"},
-  {"id":"9","title":"Investigate claim","description":"Check fraud","status":"IN_PROGRESS"}
+  {"id":"8","title":"Renew policy","description":"Send notice","status":"NEW"}
 ]
